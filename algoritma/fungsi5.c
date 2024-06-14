@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "fungsi5.h"
 
 // Struktur data yang digunakan
 typedef struct Pasien {

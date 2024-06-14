@@ -37,98 +37,6 @@ typedef struct BiayaTindakan {
     struct BiayaTindakan *next;
 } BiayaTindakan;
 
-// Fungsi untuk membaca csv data pasien
-int baca_csv_pasien(const char *nama_file, Pasien **head) {
-    FILE *file = fopen(nama_file, "r");
-    if (file == NULL) {
-        printf("File tidak ditemukan.\n");
-        return 0;
-    }
-
-    char baris[500];
-    fgets(baris, sizeof(baris), file);  // Membaca header
-    while (fgets(baris, sizeof(baris), file)) {
-        Pasien *listpasien = (Pasien*)malloc(sizeof(Pasien));
-        sscanf(baris, "%d,%99[^,],%149[^,],%49[^,],%49[^,],%29[^,],%d,%19[^,],%19[^\n]",
-               &listpasien->indekspasien, listpasien->nama_pasien, listpasien->alamat,
-               listpasien->kota, listpasien->tempat_lahir, listpasien->tanggal_lahir,
-               &listpasien->umur, listpasien->nomor_bpjs, listpasien->id_pasien);
-        listpasien->next = NULL;
-
-        if (*head == NULL) {
-            *head = listpasien;
-        } else {
-            Pasien *temp = *head;
-            while (temp->next != NULL) {
-                temp = temp->next;
-            }
-            temp->next = listpasien;
-        }
-    }
-    fclose(file);
-    return 1;
-}
-
-// Fungsi untuk membaca csv data riwayat pasien
-int baca_csv_riwayat(const char *nama_file, RiwayatPasien **head) {
-    FILE *file = fopen(nama_file, "r");
-    if (file == NULL) {
-        printf("File tidak ditemukan.\n");
-        return 0;
-    }
-
-    char baris[500];
-    fgets(baris, sizeof(baris), file);  // Membaca header
-    while (fgets(baris, sizeof(baris), file)) {
-        RiwayatPasien *riwayat = (RiwayatPasien*)malloc(sizeof(RiwayatPasien));
-        sscanf(baris, "%d,%19[^,],%19[^,],%99[^,],%99[^,],%19[^,],%lf",
-               &riwayat->indeksriwayat, riwayat->tanggal_kunjungan, riwayat->id_pasien,
-               riwayat->diagnosis, riwayat->tindakan, riwayat->kontrol, &riwayat->biaya);
-        riwayat->next = NULL;
-
-        if (*head == NULL) {
-            *head = riwayat;
-        } else {
-            RiwayatPasien *temp = *head;
-            while (temp->next != NULL) {
-                temp = temp->next;
-            }
-            temp->next = riwayat;
-        }
-    }
-    fclose(file);
-    return 1;
-}
-
-// Fungsi untuk membaca csv data biaya tindakan
-int baca_csv_biaya(const char *nama_file, BiayaTindakan **head) {
-    FILE *file = fopen(nama_file, "r");
-    if (file == NULL) {
-        printf("File tidak ditemukan.\n");
-        return 0;
-    }
-
-    char baris[200];
-    fgets(baris, sizeof(baris), file);  // Membaca header
-    while (fgets(baris, sizeof(baris), file)) {
-        BiayaTindakan *biaya = (BiayaTindakan*)malloc(sizeof(BiayaTindakan));
-        sscanf(baris, "%d,%19[^,],%lf", &biaya->indekstindakan, biaya->aktivitas, &biaya->biayatindakan);
-        biaya->next = NULL;
-
-        if (*head == NULL) {
-            *head = biaya;
-        } else {
-            BiayaTindakan *temp = *head;
-            while (temp->next != NULL) {
-                temp = temp->next;
-            }
-            temp->next = biaya;
-        }
-    }
-    fclose(file);
-    return 1;
-}
-
 // Fungsi untuk mengubah bulan dalam format teks ke nomor bulan
 int bulan_ke_nomor(const char *bulan) {
     if (strcmp(bulan, "Januari") == 0) return 1;
@@ -189,16 +97,5 @@ void laporan_pendapatan(RiwayatPasien *head_riwayat) {
         } else {
             printf("Tahun %d: Tidak ada pendapatan\n", currentYear);
         }
-    }
-}
-
-
-int main() {
-    RiwayatPasien *head_riwayat = NULL;
-
-    if (baca_csv_riwayat("RiwayatPasien.csv", &head_riwayat)) {
-        laporan_pendapatan(head_riwayat);
-    } else {
-        printf("Gagal membaca file CSV.\n");
     }
 }

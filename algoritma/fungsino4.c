@@ -1,3 +1,4 @@
+#include "laporan_pendapatan.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

@@ -114,8 +114,6 @@ int main() {
                 printf("Jumlah pasien beserta penyakit tiap bulannya:\n");
                 jumlah_pasien_dan_penyakit_per_tahun(head_riwayat);
                 break;
-                //informasi_jumlah_pasien_dan_penyakit(head_riwayat);
-                break;
             case 12:
                 //informasi_kontrol (head_riwayat);
                 break;

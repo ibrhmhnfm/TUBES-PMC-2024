@@ -71,9 +71,10 @@ int main() {
         printf("6. Ubah Riwayat Pasien\n");
         printf("7. Hapus Riwayat Pasien\n");
         printf("8. Cari Riwayat Pasien\n");
-        printf("9. Informasi Pendapatan\n");
-        printf("10. Informasi Jumlah Pasien dan Penyakit\n");
-        printf("11. Informasi Kontrol Pasien\n");
+        printf("9. Cari Data dan Riwayat Pasien\n");
+        printf("10. Informasi Pendapatan\n");
+        printf("11. Informasi Jumlah Pasien dan Penyakit\n");
+        printf("12. Informasi Kontrol Pasien\n");
         printf("0. Keluar\n");
         printf("Masukkan pilihan: ");
         scanf("%d", &pilihan);
@@ -104,13 +105,19 @@ int main() {
                 cari_riwayat(&head_riwayat);
                 break;
             case 9:
-                //informasi_pendapatan(head_riwayat);
+                //informasi_data_dan_riwayat(head_riwayat);
                 break;
             case 10:
-                //informasi_riwayat(head_riwayat);
+                //informasi_pendapatan(head_riwayat);
                 break;
             case 11:
-                //informasi_kontrol(head_riwayat);
+                printf("Jumlah pasien beserta penyakit tiap bulannya:\n");
+                jumlah_pasien_dan_penyakit_per_tahun(head_riwayat);
+                break;
+                //informasi_jumlah_pasien_dan_penyakit(head_riwayat);
+                break;
+            case 12:
+                //informasi_kontrol (head_riwayat);
                 break;
             case 0:
                 printf("Keluar dari program.\n");

@@ -10,13 +10,13 @@
 #include "utils\parsing.h"
 
 // FIle program
-// #include "algoritma\fungsi1.h"
-// #include "algoritma\fungsi3.h"
-// #include "algoritma\fungsi4.h"
-// #include "algoritma\fungsi5.h"
-// #include "algoritma\fungsi6.h"
-// #include "algoritma\fungsi7.h"
+#include "algoritma\fungsi1.h"
 #include "algoritma\fungsi2.h"
+#include "algoritma\fungsi3.h"
+#include "algoritma\fungsi4.h"
+#include "algoritma\fungsi5.h"
+#include "algoritma\fungsi6.h"
+
 
 // Struktur data yang digunakan
 typedef struct Pasien {

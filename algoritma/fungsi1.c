@@ -16,37 +16,6 @@ typedef struct Pasien {
     struct Pasien *next;
 } Pasien;
 
-// Fungsi untuk membaca CSV pasien
-int baca_csv_pasien(const char *nama_file, Pasien **head) {
-    FILE *file = fopen(nama_file, "r");
-    if (file == NULL) {
-        printf("File tidak ditemukan.\n");
-        return 0;
-    }
-
-    char baris[500];
-    fgets(baris, sizeof(baris), file);  // Membaca header
-    while (fgets(baris, sizeof(baris), file)) {
-        Pasien *listpasien = (Pasien*)malloc(sizeof(Pasien));
-        sscanf(baris, "%d,%99[^,],%149[^,],%49[^,],%49[^,],%29[^,],%d,%19[^,],%19[^\n]",
-               &listpasien->indekspasien, listpasien->nama_pasien, listpasien->alamat,
-               listpasien->kota, listpasien->tempat_lahir, listpasien->tanggal_lahir,
-               &listpasien->umur, listpasien->nomor_bpjs, listpasien->id_pasien);
-        listpasien->next = NULL;
-
-        if (*head == NULL) {
-            *head = listpasien;
-        } else {
-            Pasien *temp = *head;
-            while (temp->next != NULL) {
-                temp = temp->next;
-            }
-            temp->next = listpasien;
-        }
-    }
-    fclose(file);
-    return 1;
-}
 
 // Fungsi untuk menyimpan CSV pasien
 void simpan_csv_pasien(const char *nama_file, Pasien *head) {

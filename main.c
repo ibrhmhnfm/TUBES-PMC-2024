@@ -122,7 +122,9 @@ int main() {
                 jumlah_pasien_dan_penyakit_per_tahun(head_riwayat);
                 break;
             case 12:
-                //informasi_kontrol (head_riwayat);
+                printf("Masukkan Tanggal Kontrol (DD Bulan YYYY): ");
+                scanf(" %[^\n]", tanggal_kontrol);
+                informasi_kontrol_pasien(head_riwayat, tanggal_kontrol);
                 break;
             case 0:
                 printf("Keluar dari program.\n");

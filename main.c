@@ -127,7 +127,11 @@ int main() {
                 scanf(" %[^\n]", tanggal_kontrol);
                 informasi_kontrol_pasien(head_riwayat, tanggal_kontrol);
                 break;
-            case 0:
+            case 0: 
+                char nama_file[100];
+                printf("Masukkan nama file untuk menyimpan data (misal: DataPasien2024.csv): ");
+                scanf(" %[^\n]", nama_file);
+                simpan_csv_pasien(nama_file, head_pasien);
                 printf("Keluar dari program.\n");
                 break;
             default:

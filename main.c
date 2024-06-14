@@ -105,7 +105,14 @@ int main() {
                 cari_riwayat(&head_riwayat);
                 break;
             case 9:
-                //informasi_data_dan_riwayat(head_riwayat);
+                printf("Masukkan ID Pasien: ");
+                scanf(" %[^\n]", id_pasien);
+                printf("\n\n\n");
+                informasi_pasien(head_pasien, id_pasien);
+                printf("================================================================================================================================\n");
+                printf("\n\n\n");
+                informasi_riwayat_pasien(head_riwayat, id_pasien);
+                printf("================================================================================================================================\n");
                 break;
             case 10:
                 //informasi_pendapatan(head_riwayat);

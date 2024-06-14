@@ -81,16 +81,16 @@ int main() {
 
         switch (pilihan) {
             case 1:
-                //tambah_pasien(&head_pasien);
+                tambah_pasien(&head_pasien);
                 break;
             case 2:
-                //ubah_pasien(head_pasien);
+                ubah_pasien(head_pasien);
                 break;
             case 3:
-                //hapus_pasien(&head_pasien);
+                hapus_pasien(&head_pasien);
                 break;
             case 4:
-                //cari_pasien(head_pasien);
+                cari_pasien(head_pasien);
                 break;
             case 5:
                 tambah_riwayat(&head_riwayat, &head_biaya, &head_pasien, count_riwayat(&head_riwayat));

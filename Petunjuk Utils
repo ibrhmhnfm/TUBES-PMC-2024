@@ -1,0 +1,16 @@
+Panggil file dengan nulis di awal:
+#include "parsing.h"
+Atau #include "(namafile.h)" // ganti pake nama file yang mau dipake fungsinya.
+
+File ini mengandung 3 fungsi utama, (2 lg pending) yaitu baca_csv_pasien, baca_csv_riwayat, baca_csv_biaya, sedangkan fungsi lain spt cetak_... hanya untuk membantu
+
+Arti value yg dikembalikan:
+  - 0 : Terdapat error, baik file tidak ada ataupun format file salah. (pesan output pending)
+  - 1 : file dapat dibuka dan matriks telah terisi
+
+Parameter yg diperlukan
+  - struct head u/ struct terkait
+  - char nama file
+
+
+Disarankan untuk membaca bagian untuk testing :D

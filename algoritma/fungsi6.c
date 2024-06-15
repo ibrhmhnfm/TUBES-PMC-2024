@@ -4,7 +4,11 @@
 #include "fungsi6.h"
 
 // Fungsi untuk menampilkan pasien yang perlu kontrol pada tanggal tertentu
-void informasi_kontrol_pasien(RiwayatPasien *head_riwayat, const char *tanggal_kontrol) {
+void informasi_kontrol_pasien(RiwayatPasien *head_riwayat) {
+    char tanggal_kontrol[50];
+    printf("Masukkan Tanggal Kontrol (dd month yyyy seperti: 12 Januari 2023): \n");
+    scanf(" %[^\n]", tanggal_kontrol);
+    
     RiwayatPasien *current = head_riwayat;
     int found = 0;
 

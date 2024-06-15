@@ -5,48 +5,54 @@
 #include "fungsi3.h"
 
 // Fungsi untuk menampilkan informasi pasien berdasarkan ID pasien //tambahan
-void informasi_pasien(Pasien *head_pasien, const char *id_pasien) {
-    Pasien *current = head_pasien;
-    int found = 0;
+void informasi_riwayat_pasien(Pasien *head_pasien, RiwayatPasien *head_riwayat) {
+    char id_pasien[50];
+    printf("Masukkan ID Pasien: ");
+    scanf(" %[^\n]", id_pasien);
 
+    Pasien *current_pasien = head_pasien;
+    int found_pasien = 0;
+
+    printf("\n\n\n");
     printf("Informasi Pasien dengan ID: %s\n", id_pasien);
     printf("================================================================================================================================\n");
     printf("| %-5s | %-25s | %-50s | %-20s | %-15s |\n", "Indeks", "Nama", "Alamat", "Kota", "Nomor BPJS");
     printf("================================================================================================================================\n");
 
-    while (current != NULL) {
-        if (strcmp(current->id_pasien, id_pasien) == 0) {
-            found = 1;
+    while (current_pasien != NULL) {
+        if (strcmp(current_pasien->id_pasien, id_pasien) == 0) {
+            found_pasien = 1;
             printf("| %-5d | %-25s | %-50s | %-20s | %-15s |\n",
-                   current->indekspasien, current->nama_pasien, current->alamat, current->kota, current->nomor_bpjs);
+                   current_pasien->indekspasien, current_pasien->nama_pasien, current_pasien->alamat, current_pasien->kota, current_pasien->nomor_bpjs);
         }
-        current = current->next;
+        current_pasien = current_pasien->next;
     }
 
-    if (!found) {
+    if (!found_pasien) {
         printf("Tidak ada informasi pasien ditemukan untuk ID pasien: %s\n", id_pasien);
     }
-}
 
-// Fungsi untuk menampilkan riwayat medis seorang pasien berdasarkan ID pasien //tambahan
-void informasi_riwayat_pasien(RiwayatPasien *head_riwayat, const char *id_pasien) {
-    RiwayatPasien *current = head_riwayat;
-    int found = 0;
+    printf("================================================================================================================================\n");
+    printf("\n\n\n");
+
+    RiwayatPasien *current_riwayat = head_riwayat;
+    int found_riwayat = 0;
 
     printf("Riwayat Medis Pasien dengan ID: %s\n", id_pasien);
     printf("================================================================================================================================\n");
     printf("| %-5s | %-15s | %-30s | %-30s | %-10s | %-10s |\n", "Indeks", "Tanggal Kunjungan", "Diagnosis", "Tindakan", "Kontrol", "Biaya");
     printf("================================================================================================================================\n");
 
-    while (current != NULL) {
-        if (strcmp(current->id_pasien, id_pasien) == 0) {
-            found = 1;
+    while (current_riwayat != NULL) {
+        if (strcmp(current_riwayat->id_pasien, id_pasien) == 0) {
+            found_riwayat = 1;
             printf("| %-5d | %-15s | %-30s | %-30s | %-10s | %-10.2lf |\n",
-                   current->indeksriwayat, current->tanggal_kunjungan, current->diagnosis, current->tindakan, current->kontrol, current->biaya);
+                   current_riwayat->indeksriwayat, current_riwayat->tanggal_kunjungan, current_riwayat->diagnosis, current_riwayat->tindakan, current_riwayat->kontrol, current_riwayat->biaya);
         }
-        current = current->next;
+        current_riwayat = current_riwayat->next;
     }
-    if (!found) {
+    if (!found_riwayat) {
         printf("Tidak ada riwayat medis ditemukan untuk ID pasien: %s\n", id_pasien);
     }
+    printf("================================================================================================================================\n");
 }

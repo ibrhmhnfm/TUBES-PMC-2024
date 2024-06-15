@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "fungsi3.h"
+#include "const.h"
 
 // Fungsi untuk menampilkan informasi pasien berdasarkan ID pasien //tambahan
 void informasi_riwayat_pasien(Pasien *head_pasien, RiwayatPasien *head_riwayat) {

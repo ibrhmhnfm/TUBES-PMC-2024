@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "fungsi6.h"
+#include "const.h"
 
 // Fungsi untuk menampilkan pasien yang perlu kontrol pada tanggal tertentu
 void informasi_kontrol_pasien(RiwayatPasien *head_riwayat) {

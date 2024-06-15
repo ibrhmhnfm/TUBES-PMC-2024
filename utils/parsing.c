@@ -1,74 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "parsing.h"
+#include "..\algoritma\const.h"
 
-// Deklarasi struct sebagai linked list penyimpanan data pasien
-typedef struct Pasien {
-    int indekspasien;
-    char nama_pasien[100];
-    char alamat[150];
-    char kota[50];
-    char tempat_lahir[50];
-    char tanggal_lahir[30];
-    int umur;
-    char nomor_bpjs[20];
-    char id_pasien[20];
-    struct Pasien *next;
-} Pasien;
-
-// Deklarasi struct sebagai linked list penyimpanan data riwayat pasien
-typedef struct RiwayatPasien {
-    int indeksriwayat;
-    char tanggal_kunjungan[20];
-    char id_pasien[20];
-    char diagnosis[100];
-    char tindakan[100];
-    char kontrol[20];
-    double biaya;
-    struct RiwayatPasien *next;
-} RiwayatPasien;
-
-// Deklarasi struct sebagai linked list penyimpanan data biaya tindakan
-typedef struct BiayaTindakan {
-    int indekstindakan;
-    char aktivitas[20];
-    double biayatindakan;
-    struct BiayaTindakan *next;
-} BiayaTindakan;
-
-// Fungsi untuk membaca csv data pasien
-int baca_csv_pasien(const char *nama_file, Pasien **head) {
-    FILE *file = fopen(nama_file, "r");
-    if (file == NULL) {
-        printf("File tidak ditemukan.\n");
-        return 0;
-    }
-
-    char baris[500];
-    fgets(baris, sizeof(baris), file);  // Membaca header
-    while (fgets(baris, sizeof(baris), file)) {
-        Pasien *listpasien = (Pasien*)malloc(sizeof(Pasien));
-        sscanf(baris, "%d,%99[^,],%149[^,],%49[^,],%49[^,],%29[^,],%d,%19[^,],%19[^\n]",
-               &listpasien->indekspasien, listpasien->nama_pasien, listpasien->alamat,
-               listpasien->kota, listpasien->tempat_lahir, listpasien->tanggal_lahir,
-               &listpasien->umur, listpasien->nomor_bpjs, listpasien->id_pasien);
-        listpasien->next = NULL;
-
-        if (*head == NULL) {
-            *head = listpasien;
-        } else {
-            Pasien *temp = *head;
-            while (temp->next != NULL) {
-                temp = temp->next;
-            }
-            temp->next = listpasien;
-        }
-    }
-    fclose(file);
-    return 1;
-}
-
-// Fungsi untuk membaca csv data riwayat pasien
+// Fungsi untuk membaca CSV riwayat
 int baca_csv_riwayat(const char *nama_file, RiwayatPasien **head) {
     FILE *file = fopen(nama_file, "r");
     if (file == NULL) {
@@ -80,10 +16,13 @@ int baca_csv_riwayat(const char *nama_file, RiwayatPasien **head) {
     fgets(baris, sizeof(baris), file);  // Membaca header
     while (fgets(baris, sizeof(baris), file)) {
         RiwayatPasien *riwayat = (RiwayatPasien*)malloc(sizeof(RiwayatPasien));
-        sscanf(baris, "%d,%19[^,],%19[^,],%99[^,],%99[^,],%19[^,],%lf",
+        sscanf(baris, "%d,%19[^,],%49[^,],%99[^,],%99[^,],%19[^,],%lf",
                &riwayat->indeksriwayat, riwayat->tanggal_kunjungan, riwayat->id_pasien,
                riwayat->diagnosis, riwayat->tindakan, riwayat->kontrol, &riwayat->biaya);
         riwayat->next = NULL;
+        
+        // Trim trailing whitespace
+        trim_trailing_whitespace(riwayat->id_pasien);
 
         if (*head == NULL) {
             *head = riwayat;
@@ -93,6 +32,40 @@ int baca_csv_riwayat(const char *nama_file, RiwayatPasien **head) {
                 temp = temp->next;
             }
             temp->next = riwayat;
+        }
+    }
+    fclose(file);
+    return 1;
+}
+
+// Fungsi untuk membaca CSV data pasien 
+int baca_csv_pasien(const char *nama_file, Pasien **head) {
+    FILE *file = fopen(nama_file, "r");
+    if (file == NULL) {
+        printf("File tidak ditemukan.\n");
+        return 0;
+    }
+
+    char baris[500];
+    fgets(baris, sizeof(baris), file);  // Membaca header
+    while (fgets(baris, sizeof(baris), file)) {
+        Pasien *pasien = (Pasien*)malloc(sizeof(Pasien));
+        sscanf(baris, "%d,%99[^,],%149[^,],%49[^,],%49[^,],%29[^,],%d,%19[^,],%49[^,]",
+               &pasien->indekspasien, pasien->nama_pasien, pasien->alamat, pasien->kota,
+               pasien->tempat_lahir, pasien->tanggal_lahir, &pasien->umur, pasien->nomor_bpjs, pasien->id_pasien);
+        pasien->next = NULL;
+
+        // Trim trailing whitespace
+        trim_trailing_whitespace(pasien->id_pasien);
+
+        if (*head == NULL) {
+            *head = pasien;
+        } else {
+            Pasien *temp = *head;
+            while (temp->next != NULL) {
+                temp = temp->next;
+            }
+            temp->next = pasien;
         }
     }
     fclose(file);
@@ -126,6 +99,16 @@ int baca_csv_biaya(const char *nama_file, BiayaTindakan **head) {
     }
     fclose(file);
     return 1;
+}
+
+// Function to trim trailing whitespace
+void trim_trailing_whitespace(char *str) {
+    char *end;
+    end = str + strlen(str) - 1;
+    while (end > str && isspace((unsigned char)*end)) {
+        end--;
+    }
+    end[1] = '\0';
 }
 
 // Fungsi untuk mencetak data pasien

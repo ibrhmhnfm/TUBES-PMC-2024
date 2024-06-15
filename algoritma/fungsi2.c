@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "fungsi2.h"
-#include "..\utils\parsing.h"
+#include "const.h"
 
 void tambah_riwayat(RiwayatPasien *head, BiayaTindakan *head2, Pasien *head3, int total){
     int biaya;

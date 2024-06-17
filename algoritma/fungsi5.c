@@ -41,7 +41,6 @@ const char *get_month_name(const char *month_number) {
 // Fungsi untuk menambahkan pasien berdasarkan bulan dan tahun
 void tambah_pasien_bulan_tahun(YearCount **head, const char *year, const char *month_year, const char *diagnosis) {
     YearCount *current_year = *head;
-
     while (current_year != NULL && strcmp(current_year->year, year) != 0) {
         current_year = current_year->next;
     }
@@ -95,7 +94,8 @@ DiseaseCount *sort_disease_count(DiseaseCount *head) {
         if (!sorted || sorted->count < current->count) {
             current->next = sorted;
             sorted = current;
-        } else {
+        } 
+        else {
             DiseaseCount *temp = sorted;
             while (temp->next && temp->next->count >= current->count) {
                 temp = temp->next;

@@ -26,7 +26,7 @@ int main() {
     
     baca_csv_pasien("C:\\Users\\Nasywa\\Downloads\\TUBES-PMC-2024-main\\TUBES-PMC-2024-main\\data\\DataPasien.csv", &head_pasien);
     baca_csv_riwayat("C:\\Users\\Nasywa\\Downloads\\TUBES-PMC-2024-main\\TUBES-PMC-2024-main\\data\\RiwayatPasien.csv", &head_riwayat);
-    baca_csv_biaya("C:\\Users\\Nasywa\\Downloads\\TUBES-PMC-2024-main\\TUBES-PMC-2024-main\\data\\/BiayaTindakan.csv", &head_biaya);
+    baca_csv_biaya("C:\\Users\\Nasywa\\Downloads\\TUBES-PMC-2024-main\\TUBES-PMC-2024-main\\data\\BiayaTindakan.csv", &head_biaya);
 
     int pilihan;
     do {

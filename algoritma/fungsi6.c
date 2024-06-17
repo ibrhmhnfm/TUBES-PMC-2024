@@ -14,15 +14,16 @@ void informasi_kontrol_pasien(RiwayatPasien *head_riwayat) {
     int found = 0;
 
     printf("Pasien yang perlu kontrol pada tanggal: %s\n", tanggal_kontrol);
-    printf("================================================================\n");
-    printf("| %-5s | %-15s | %-30s | %-30s | %-10s | %-10s |\n", "Indeks", "Tanggal Kunjungan", "ID Pasien", "Diagnosis", "Tindakan", "Biaya");
-    printf("================================================================\n");
+    printf("==============================================================================================================================================\n");
+    printf("| %-5s | %-17s | %-30s | %-30s | %-30s | %-10s |\n", "Indeks", "Tanggal Kunjungan", "ID Pasien", "Diagnosis", "Tindakan", "Biaya");
+    printf("==============================================================================================================================================\n");
 
     while (current != NULL) {
         if (strcmp(current->kontrol, tanggal_kontrol) == 0) {
             found = 1;
-            printf("| %-5d | %-15s | %-30s | %-30s | %-10s | %-10.2lf |\n",
+            printf("| %-5d  | %-17s | %-30s | %-30s | %-30s | %-10.2lf |\n",
                    current->indeksriwayat, current->tanggal_kunjungan, current->id_pasien, current->diagnosis, current->tindakan, current->biaya);
+            printf("==============================================================================================================================================\n");
         }
         current = current->next;
     }

@@ -48,21 +48,30 @@ void laporan_pendapatan(RiwayatPasien *head_riwayat) {
     }
 
     printf("Laporan Pendapatan Bulanan:\n");
+    printf("========================================================\n");
+    printf("| Bulan |    Total Pendapatan  | Rata-rata Pendapatan |\n");
+    printf("========================================================\n");
     for (int i = 0; i < 12; i++) {
         if (jumlahBulan[i] > 0) {
-            printf("Bulan %d: Total Pendapatan = %.2f, Rata-rata Pendapatan = %.2f\n", i + 1, pendapatan_perbulan[i], pendapatan_perbulan[i] / jumlahBulan[i]);
+            printf("| %5d | %16.2f     | %20.2f   |\n", i + 1, pendapatan_perbulan[i], pendapatan_perbulan[i] / jumlahBulan[i]);
         } else {
-            printf("Bulan %d: Tidak ada pendapatan\n", i + 1);
+            printf("| %5d | %16s | %20s   |\n", i + 1, "Tidak ada pendapatan", "");
         }
     }
+    printf("========================================================\n");
 
     printf("\nLaporan Pendapatan Tahunan (2018-2023):\n");
+    printf("========================================================\n");
+    printf("| Tahun |    Total Pendapatan  | Rata-rata Pendapatan |\n");
+    printf("========================================================\n");
     for (int i = 0; i < 6; i++) {
-        int currentYear = 2018 + i;
+        int tahun_sekarang = 2018 + i;
         if (jumlahTahun[i] > 0) {
-            printf("Tahun %d: Total Pendapatan = %.2f, Rata-rata Pendapatan = %.2f\n", currentYear, pendapatan_pertahun[i], pendapatan_pertahun[i] / jumlahTahun[i]);
+            printf("| %5d | %16.2f     | %20.2f |\n", tahun_sekarang, pendapatan_pertahun[i], pendapatan_pertahun[i] / jumlahTahun[i]);
         } else {
-            printf("Tahun %d: Tidak ada pendapatan\n", currentYear);
+            printf("| %5d | %16s | %20s |\n", tahun_sekarang, "Tidak ada pendapatan", "");
         }
     }
+    printf("========================================================\n");
+    return 0;
 }

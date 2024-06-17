@@ -88,7 +88,7 @@ int main() {
             case 0: 
                 /*char nama_file1[100], nama_file2[100];
                 printf("Masukkan nama file untuk menyimpan data pasien (misal: DataPasien2024.csv): ");
-                scanf(" %[^\n]", nama_file);
+                scanf(" %[^\n]", nama_file1);
                 simpan_csv_pasien(nama_file1, head_pasien);
 
                 printf("Masukkan nama file untuk menyimpan data riwayat (misal: RiwayatPasien2024.csv): ");

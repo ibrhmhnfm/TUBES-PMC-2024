@@ -17,7 +17,7 @@
 void simpan_csv_riwayat(const char *nama_file, RiwayatPasien *head){
     FILE *file = fopen(nama_file, "w");
     if (file == NULL) {
-        printf("Gagal membuka file.\n");
+        printf("Gagal menyimpan file.\n");
         return;
     }
 

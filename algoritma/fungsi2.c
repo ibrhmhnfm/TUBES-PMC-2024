@@ -44,22 +44,27 @@ void cari_riwayat(RiwayatPasien *head){
     int found = 0;
 
     RiwayatPasien *temp = head->next;
-    
-    while (temp != NULL) {
-        if (strcmp(temp->id_pasien, id_pasien) == 0) {
-            found++;
-            printf(">> Kunjungan ke-%d\n", found);
-            printf("    -Entry Data ke-%d\n", temp->indeksriwayat);
-            printf("    -Tanggal Kunjungan: %s\n", temp->tanggal_kunjungan);
-            printf("    -Diagnosis: %s\n", temp->diagnosis);
-            printf("    -Tindakan: %s\n", temp->tindakan);
-            printf("    -Biaya: Rp%.2f\n", temp->biaya);
-            printf("    -Tanggal Kontrol: %s\n\n", temp->kontrol);
+
+    RiwayatPasien *current_riwayat = head;
+    int found_riwayat = 0;
+
+    printf("Riwayat Medis Pasien dengan ID: %s\n", id_pasien);        
+    printf("================================================================================================================================\n");
+    printf("| %-5s | %-15s | %-30s | %-30s | %-10s | %-10s |\n", "Indeks", "Tanggal Kunjungan", "Diagnosis", "Tindakan", "Kontrol", "Biaya");
+    printf("================================================================================================================================\n");
+
+    while (current_riwayat != NULL) {
+        if (strcmp(current_riwayat->id_pasien, id_pasien) == 0) {
+            found_riwayat = 1;                
+            printf("| %-5d | %-15s | %-30s | %-30s | %-10s | %-10.2lf |\n",
+            current_riwayat->indeksriwayat, current_riwayat->tanggal_kunjungan, current_riwayat->diagnosis, current_riwayat->tindakan, current_riwayat->kontrol, current_riwayat->biaya);
+            }
+            current_riwayat = current_riwayat->next;
         }
-        temp = temp->next;
-    }
-    if (!found)
-        printf("Riwayat pasien dengan ID %s tidak dapat ditemukan.\n", id_pasien);
+        if (!found_riwayat) {
+            printf("Tidak ada riwayat medis ditemukan untuk ID pasien: %s\n", id_pasien);
+        }
+        printf("================================================================================================================================\n");
 }
 
 // Fungsi untuk mencari last_index dari struct Riwayat Pasien
@@ -208,22 +213,28 @@ void edit_riwayat(RiwayatPasien *head, Pasien *pasien, BiayaTindakan *harga){
     int temu = 0;
 
     if (cek_id(id_pasien, pasien)){
-        while (temp_print != NULL){
-            if (strcmp(temp_print->id_pasien, id_pasien)==0){
-                temu++;
-                printf("\n\n>>Kunjungan ke-%d", temu);
-                printf("\n  -Entry Data ke-%d", temp_print->indeksriwayat);
-                printf("\n  -Tanggal Kunjungan : %s", temp_print->tanggal_kunjungan);
-                printf("\n  -ID Pasien : %s", temp_print->id_pasien); 
-                printf("\n  -Diagnosis : %s", temp_print->diagnosis);
-                printf("\n  -Tindakan : %s", temp_print->tindakan);
-                printf("\n  -Biaya : Rp%.2f", temp_print->biaya);
-                printf("\n  -Tanggal Kontrol : %s", temp->kontrol);
+        RiwayatPasien *current_riwayat = head;
+        int found_riwayat = 0;
+
+        printf("Riwayat Medis Pasien dengan ID: %s\n", id_pasien);
+        printf("================================================================================================================================\n");
+        printf("| %-5s | %-15s | %-30s | %-30s | %-10s | %-10s |\n", "Indeks", "Tanggal Kunjungan", "Diagnosis", "Tindakan", "Kontrol", "Biaya");
+        printf("================================================================================================================================\n");
+
+        while (current_riwayat != NULL) {
+            if (strcmp(current_riwayat->id_pasien, id_pasien) == 0) {
+                found_riwayat = 1;
+                printf("| %-5d | %-15s | %-30s | %-30s | %-10s | %-10.2lf |\n",
+                    current_riwayat->indeksriwayat, current_riwayat->tanggal_kunjungan, current_riwayat->diagnosis, current_riwayat->tindakan, current_riwayat->kontrol, current_riwayat->biaya);
             }
-            temp_print = temp_print->next;
+            current_riwayat = current_riwayat->next;
         }
+        if (!found_riwayat) {
+            printf("Tidak ada riwayat medis ditemukan untuk ID pasien: %s\n", id_pasien);
+        }
+        printf("================================================================================================================================\n");
     
-        printf("\n\nEntry data riwayat yang ingin diubah :");
+        printf("\n\nIndeks data riwayat yang ingin diubah :");
         scanf("%d", &indeksriwayat);
         while (temp != NULL) {
             if (strcmp(temp->id_pasien, id_pasien) == 0 && temp->indeksriwayat == indeksriwayat) {
@@ -276,27 +287,31 @@ void hapus_riwayat(RiwayatPasien *head, Pasien *pasien){
     clear_input_buffer();
 
     RiwayatPasien *temp = head;
-    RiwayatPasien *temp_print = head;
     Pasien *temp2 = pasien;
     int temu = 0;
 
     if (cek_id(id_pasien, pasien)){
-        while (temp_print != NULL){
-            if (strcmp(temp_print->id_pasien, id_pasien)==0){
-                temu++;
-                printf("\n\n>>Kunjungan ke-%d", temu);
-                printf("\n  -Entry Data ke-%d", temp_print->indeksriwayat);
-                printf("\n  -Tanggal Kunjungan : %s", temp_print->tanggal_kunjungan);
-                printf("\n  -ID Pasien : %s", temp_print->id_pasien); 
-                printf("\n  -Diagnosis : %s", temp_print->diagnosis);
-                printf("\n  -Tindakan : %s", temp_print->tindakan);
-                printf("\n  -Biaya : Rp%.2f", temp_print->biaya);
-                printf("\n  -Tanggal Kontrol : %s", temp->kontrol);
+        RiwayatPasien *current_riwayat = head;
+        int found_riwayat = 0;
+
+        printf("Riwayat Medis Pasien dengan ID: %s\n", id_pasien);
+        printf("================================================================================================================================\n");
+        printf("| %-5s | %-15s | %-30s | %-30s | %-10s | %-10s |\n", "Indeks", "Tanggal Kunjungan", "Diagnosis", "Tindakan", "Kontrol", "Biaya");
+        printf("================================================================================================================================\n");
+
+        while (current_riwayat != NULL) {
+            if (strcmp(current_riwayat->id_pasien, id_pasien) == 0) {
+                found_riwayat = 1;
+                printf("| %-5d | %-15s | %-30s | %-30s | %-10s | %-10.2lf |\n",
+                    current_riwayat->indeksriwayat, current_riwayat->tanggal_kunjungan, current_riwayat->diagnosis, current_riwayat->tindakan, current_riwayat->kontrol, current_riwayat->biaya);
             }
-            temp_print = temp_print->next;
+            current_riwayat = current_riwayat->next;
         }
-    
-        printf("\n\nEntry data riwayat yang ingin dihapus :");
+        if (!found_riwayat) {
+            printf("Tidak ada riwayat medis ditemukan untuk ID pasien: %s\n", id_pasien);
+        }
+        printf("================================================================================================================================\n");
+        printf("\n\nIndeks data riwayat yang ingin dihapus :");
         scanf("%d", &indeksriwayat);
 
         RiwayatPasien *temp = head;

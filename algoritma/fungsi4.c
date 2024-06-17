@@ -48,9 +48,9 @@ void laporan_pendapatan(RiwayatPasien *head_riwayat) {
     }
 
     printf("Laporan Pendapatan Bulanan:\n");
-    printf("========================================================\n");
+    printf("=========================================================\n");
     printf("| Bulan |    Total Pendapatan  | Rata-rata Pendapatan |\n");
-    printf("========================================================\n");
+    printf("=========================================================\n");
     for (int i = 0; i < 12; i++) {
         if (jumlahBulan[i] > 0) {
             printf("| %5d | %16.2f     | %20.2f   |\n", i + 1, pendapatan_perbulan[i], pendapatan_perbulan[i] / jumlahBulan[i]);

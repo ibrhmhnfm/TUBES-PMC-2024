@@ -1,178 +1,321 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "fungsi2.h"
 #include "const.h"
+/*==================================== ALGORITMA FUNGSI 2 ========================================*/
+/**Algoritma dibuat untuk menyelesaikan tugas besar PMC Semester Genap tahun ajar 2023/2024 
+ * 
+ *  Nama    : Ibrahim Hanif Mulyana
+ *  NIM     : 13222111
+ *  Kelas   : K-03
+ * 
+ *  nama file: fungsi2.c
+ *  Referensi: -
+ * 
+==================================================================================================*/
 
-void tambah_riwayat(RiwayatPasien *head, BiayaTindakan *head2, Pasien *head3, int total){
-    int biaya;
+
+// Fungsi untuk melakukan save pada file
+void simpan_csv_riwayat(const char *nama_file, RiwayatPasien *head){
+    FILE *file = fopen(nama_file, "w");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return;
+    }
+
+    fprintf(file, "Indeks Riwayat, Tanggal, ID Pasien, Diagnosis, Tindakan, Kontrol, Biaya\n");
+
+    RiwayatPasien *temp = head;
+    while (temp != NULL) {
+        fprintf(file, "%d,%s,%s,%s,%s,%s,%lf\n",
+                temp->indeksriwayat, temp->tanggal_kunjungan, temp->id_pasien,
+                temp->diagnosis, temp->tindakan, temp->kontrol,
+                temp->biaya);
+        temp = temp->next;
+    }
+
+    fclose(file);
+    printf("Riwayat Pasien berhasil disimpan ke dalam file %s.\n", nama_file);
+}
+
+// Fungsi mencari data riwayat pasien berdasarkan id pasien
+void cari_riwayat(RiwayatPasien *head){
+    char id_pasien[SHORT];
+    printf("Masukkan ID Pasien yang ingin dicari: ");
+    scanf(" %[^\n]", id_pasien);
+    int found = 0;
+
+    RiwayatPasien *temp = head->next;
+    
+    while (temp != NULL) {
+        if (strcmp(temp->id_pasien, id_pasien) == 0) {
+            found++;
+            printf(">> Kunjungan ke-%d\n", found);
+            printf("    -Entry Data ke-%d\n", temp->indeksriwayat);
+            printf("    -Tanggal Kunjungan: %s\n", temp->tanggal_kunjungan);
+            printf("    -Diagnosis: %s\n", temp->diagnosis);
+            printf("    -Tindakan: %s\n", temp->tindakan);
+            printf("    -Biaya: Rp%.2f\n", temp->biaya);
+            printf("    -Tanggal Kontrol: %s\n\n", temp->kontrol);
+        }
+        temp = temp->next;
+    }
+    if (!found)
+        printf("Riwayat pasien dengan ID %s tidak dapat ditemukan.\n", id_pasien);
+}
+
+// Fungsi untuk mencari last_index dari struct Riwayat Pasien
+int last_index_riwayat(RiwayatPasien *head){
+    int last_index = 0;
+    RiwayatPasien *temp = head;
+    while (temp != NULL) {
+        if (temp->indeksriwayat > last_index) {
+            last_index = temp->indeksriwayat;
+        }
+        temp = temp->next;
+    }
+    return last_index;
+}
+
+// Fungsi mengecek apakah ID sudah terdaftar
+int cek_id(char *tes, Pasien *head){
+    Pasien *temp = head;
+    while (temp != NULL) {
+        if (strcmp(temp->id_pasien, tes) == 0) {
+            return 1;
+        }
+        temp = temp->next;
+    }
+    return 0; 
+}
+
+// Fungsi mengecek apakah tindakan ada di list tindakan yang dapat diberikan klinik
+int cek_tindakan(char *tes, BiayaTindakan *head){
+    BiayaTindakan *temp = head;
+    while (temp != NULL) {
+        if(strcmp(temp->aktivitas, tes) == 0) {
+            return 1;
+        }
+        temp = temp->next;
+    }
+    return 0;
+}
+
+// Fungsi menghitung biaya yang harus dibayar dari tindakan yang dilakukan
+double hitung_tindakan(char *tes, BiayaTindakan *head){
+    BiayaTindakan *temp = head;
+    while (temp != NULL) {
+        if(strcmp(temp->aktivitas, tes) == 0) {
+            return temp->biayatindakan;
+        }
+        temp = temp->next;
+    }
+    return 0;
+}
+
+void clear_input_buffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
+// Fungsi untuk menambah riwayat baru
+void tambah_riwayat(RiwayatPasien **head, Pasien *head3, BiayaTindakan *head2){
+    int total = last_index_riwayat(*head) + 1;
+    double biaya;
     char tanggal[SHORT], id_pasien[SHORT], Diagnosis[MAX], Tindakan[MAX], Kontrol[SHORT];
     
-    int found = 0, found2 = 0;
+    RiwayatPasien *newRiwayat = (RiwayatPasien*)malloc(sizeof(RiwayatPasien));
+    if (newRiwayat == NULL) {
+        printf("Gagal mengalokasikan memori.\n");
+        return;
+    }
 
     // ENTRY
-    printf("Masukkan tanggal kunjungan pasien : ");
-    scanf("%s", tanggal);
-    while(1){
-        printf("\nMasukkan ID Pasien : ");
-        scanf("%s", id_pasien);
-        Pasien *tempPasien = head3;
-        while(tempPasien != NULL) {
-            if (strcmp(tempPasien->id_pasien, id_pasien) == 0){
-                found = 1;
-                break;
-            } else {
-                tempPasien = tempPasien->next;
-            }
-        }
-        if (!found){
-            printf("\nID Pasien tidak ada di Data Pasien. Mohon masukkan ID Pasien terdaftar\n");
+    printf("Masukkan tanggal kunjungan pasien: ");
+    scanf(" %[^\n]", tanggal);
+    clear_input_buffer();
+    printf("Masukkan ID Pasien: ");
+    scanf(" %[^\n]", id_pasien);
+    clear_input_buffer();
+    
+    while(1) {
+        if (cek_id(id_pasien, head3)) {
+            printf("Pasien berhasil ditemukan!\n");
+            break;
         } else {
+            printf("\nID Pasien tidak terdaftar di database pasien. Mohon masukkan ID pasien terdaftar atau mendaftarkan pasien terlebih dahulu.\n");
+            printf("Masukkan ID Pasien: ");
+            scanf(" %[^\n]", id_pasien);
+            clear_input_buffer();
+        }
+    }
+
+    printf("Masukkan diagnosis: ");
+    scanf(" %[^\n]", Diagnosis);
+    clear_input_buffer();
+    printf("Masukkan tindakan yang dilakukan: ");
+    scanf(" %[^\n]", Tindakan);
+    clear_input_buffer();
+
+    while(1) {
+        if (!cek_tindakan(Tindakan, head2)) {
+            printf("Tindakan tidak masuk ke dalam aktivitas klinik, mohon ulangi input.\n");
+            printf("Masukkan tindakan yang dilakukan: ");
+            scanf(" %[^\n]", Tindakan);
+            clear_input_buffer();
+        } else {
+            biaya = hitung_tindakan(Tindakan, head2);
             break;
         }
     }
-    printf("\nMasukkan diagnosis : ");
-    scanf("%s", Diagnosis);
-    while(1){
-        printf("\nMasukkan tindakan yang dilakukan : ");
-        scanf("%s", Tindakan);
-        BiayaTindakan *tempTindakan = head2;
-        while(tempTindakan != NULL) {
-            if (strcmp(tempTindakan->aktivitas, Tindakan) == 0){
-                found2 = 1;
-                biaya = tempTindakan->biayatindakan;
-                break;
-            } else {
-                tempTindakan = tempTindakan->next;
-            }
-        }
-        if (!found2){
-            printf("\nTindakan tidak masuk ke dalam aktivitas klinik, mohon ulangi input : ");
-        } else {
-            break;
-        }
-    }
-    printf("\nMasukkan tanggal kontrol : ");
-    scanf("%s", Kontrol);
+
+    printf("Masukkan tanggal kontrol: ");
+    scanf(" %[^\n]", Kontrol);
+    clear_input_buffer();
 
     // Masukkan ke struct
-    RiwayatPasien *newRiwayat = (RiwayatPasien*) malloc(sizeof(RiwayatPasien));
-    newRiwayat->indeksriwayat = head->indeksriwayat + 1;
+    newRiwayat->indeksriwayat = total;
     strcpy(newRiwayat->tanggal_kunjungan, tanggal);
     strcpy(newRiwayat->id_pasien, id_pasien);
     strcpy(newRiwayat->diagnosis, Diagnosis);
     strcpy(newRiwayat->tindakan, Tindakan);
     newRiwayat->biaya = biaya;
     strcpy(newRiwayat->kontrol, Kontrol);
-    newRiwayat->next = head->next;
-    head->next = newRiwayat;
+    newRiwayat->next = NULL;
+    
+    if (*head == NULL) {
+        *head = newRiwayat;
+    } else {
+        RiwayatPasien *temp = *head;
+        while(temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newRiwayat;
+    }
 
-    printf("Riwayat Pasien Berhasil Dimasukkan\n");
+    printf("Riwayat Pasien Berhasil Dimasukkan!\n");
 }
 
-void edit_riwayat(RiwayatPasien *head){
-    char id_pasien[SHORT];
+void edit_riwayat(RiwayatPasien *head, Pasien *pasien, BiayaTindakan *harga){
+    char id_pasien[SHORT], id_pasien_baru[SHORT], tindakan[MAX];
     int indeksriwayat;
     printf("Masukkan ID Pasien yang riwayatnya ingin diubah: ");
-    scanf("%s", id_pasien);
-    printf("Masukkan Indeks Riwayat yang ingin diubah: ");
-    scanf("%d", &indeksriwayat);
+    scanf(" %[^\n]", id_pasien);
+    clear_input_buffer();
 
-    RiwayatPasien *current = head->next;
-    while (current != NULL) {
-        if (strcmp(current->id_pasien, id_pasien) == 0 && current->indeksriwayat == indeksriwayat) {
-            printf("Masukkan tanggal kunjungan baru: ");
-            scanf("%s", current->tanggal_kunjungan);
-            printf("Masukkan diagnosis baru: ");
-            scanf("%s", current->diagnosis);
-            printf("Masukkan tindakan baru: ");
-            scanf("%s", current->tindakan);
-            printf("Masukkan biaya baru: ");
-            scanf("%lf", &current->biaya);
-            printf("Masukkan tanggal kontrol baru: ");
-            scanf("%s", current->kontrol);
-            printf("Riwayat Pasien Berhasil Diubah\n");
-            return;
+    RiwayatPasien *temp = head;
+    RiwayatPasien *temp_print = head;
+    Pasien *temp2 = pasien;
+    BiayaTindakan *bayar = harga;
+    int temu = 0;
+
+    if (cek_id(id_pasien, pasien)){
+        while (temp_print != NULL){
+            if (strcmp(temp_print->id_pasien, id_pasien)==0){
+                temu++;
+                printf("\n\n>>Kunjungan ke-%d", temu);
+                printf("\n  -Entry Data ke-%d", temp_print->indeksriwayat);
+                printf("\n  -Tanggal Kunjungan : %s", temp_print->tanggal_kunjungan);
+                printf("\n  -ID Pasien : %s", temp_print->id_pasien); 
+                printf("\n  -Diagnosis : %s", temp_print->diagnosis);
+                printf("\n  -Tindakan : %s", temp_print->tindakan);
+                printf("\n  -Biaya : Rp%.2f", temp_print->biaya);
+                printf("\n  -Tanggal Kontrol : %s", temp->kontrol);
+            }
+            temp_print = temp_print->next;
         }
-        current = current->next;
+    
+        printf("\n\nEntry data riwayat yang ingin diubah :");
+        scanf("%d", &indeksriwayat);
+        while (temp != NULL) {
+            if (strcmp(temp->id_pasien, id_pasien) == 0 && temp->indeksriwayat == indeksriwayat) {
+                printf("Masukkan tanggal kunjungan baru: (sebelumnya %s): ", temp->tanggal_kunjungan);
+                scanf(" %[^\n]", temp->tanggal_kunjungan);
+                clear_input_buffer();
+                while(1){
+                    printf("Masukkan ID pasien baru (sebelumnya %s): ", temp->id_pasien);
+                    scanf(" %[^\n]", id_pasien_baru);
+                    clear_input_buffer();
+                    if (cek_id(temp->id_pasien, pasien)) {
+                        strcpy(temp->id_pasien, id_pasien);
+                        break;
+                    } else {
+                        printf("ID Pasien tidak terdaftar di database pasien. Mohon masukkan ID pasien terdaftar atau mendaftarkan pasien terlebih dahulu.\n");
+                    }
+                }
+                printf("Masukkan diagnosis baru: (sebelumnya %s): ", temp->diagnosis);
+                scanf(" %[^\n]", temp->diagnosis);
+                clear_input_buffer();
+                while(1){
+                    printf("Masukkan tindakan baru (sebelumnya %s): ", temp->tindakan);
+                    scanf(" %[^\n]", tindakan);
+                    clear_input_buffer();
+                    if (!cek_tindakan(temp->tindakan, harga)) {
+                        printf("Tindakan tidak masuk ke dalam aktivitas klinik, mohon ulangi input.\n");
+                    } else {
+                        strcpy(temp->tindakan, tindakan);
+                        temp->biaya = hitung_tindakan(temp->tindakan, bayar);
+                        break;
+                    }
+                }
+                printf("Masukkan tanggal kontrol baru: (sebelumnya %s): ", temp->kontrol);
+                scanf(" %[^\n]", temp->kontrol);
+                clear_input_buffer();
+                
+                printf("Riwayat Pasien Berhasil Diubah\n");
+                return;
+            }
+            temp = temp->next;
+        }
     }
     printf("Riwayat Pasien tidak ditemukan.\n");
 }
-
-void hapus_riwayat(RiwayatPasien *head){
-    char id_pasien[SHORT];
+void hapus_riwayat(RiwayatPasien *head, Pasien *pasien){
+    char id_pasien[SHORT], id_pasien_baru[SHORT], tindakan[MAX];
     int indeksriwayat;
     printf("Masukkan ID Pasien yang riwayatnya ingin dihapus: ");
-    scanf("%s", id_pasien);
-    printf("Masukkan Indeks Riwayat yang ingin dihapus: ");
-    scanf("%d", &indeksriwayat);
+    scanf(" %[^\n]", id_pasien);
+    clear_input_buffer();
 
-    RiwayatPasien *current = head;
-    RiwayatPasien *previous = NULL;
+    RiwayatPasien *temp = head;
+    RiwayatPasien *temp_print = head;
+    Pasien *temp2 = pasien;
+    int temu = 0;
 
-    while (current != NULL) {
-        if (strcmp(current->id_pasien, id_pasien) == 0 && current->indeksriwayat == indeksriwayat) {
-            if (previous == NULL) {
-                head = current->next;
-            } else {
-                previous->next = current->next;
+    if (cek_id(id_pasien, pasien)){
+        while (temp_print != NULL){
+            if (strcmp(temp_print->id_pasien, id_pasien)==0){
+                temu++;
+                printf("\n\n>>Kunjungan ke-%d", temu);
+                printf("\n  -Entry Data ke-%d", temp_print->indeksriwayat);
+                printf("\n  -Tanggal Kunjungan : %s", temp_print->tanggal_kunjungan);
+                printf("\n  -ID Pasien : %s", temp_print->id_pasien); 
+                printf("\n  -Diagnosis : %s", temp_print->diagnosis);
+                printf("\n  -Tindakan : %s", temp_print->tindakan);
+                printf("\n  -Biaya : Rp%.2f", temp_print->biaya);
+                printf("\n  -Tanggal Kontrol : %s", temp->kontrol);
             }
-            free(current);
-            printf("Riwayat Pasien Berhasil Dihapus\n");
-            return;
+            temp_print = temp_print->next;
         }
-        previous = current;
-        current = current->next;
+    
+        printf("\n\nEntry data riwayat yang ingin dihapus :");
+        scanf("%d", &indeksriwayat);
+
+        RiwayatPasien *temp = head;
+        RiwayatPasien *previous = NULL;
+
+        while (temp != NULL) {
+            if ((strcmp(temp->id_pasien, id_pasien) == 0)&& temp->indeksriwayat == indeksriwayat){
+                if (previous == NULL) {
+                    head = temp->next;
+                } else {
+                    previous->next = temp->next;
+                }
+                free(temp);
+                printf("Riwayat Pasien Berhasil Dihapus\n");
+                return;
+            }
+            previous = temp;
+            temp = temp->next;
+        }
     }
     printf("Riwayat Pasien tidak ditemukan.\n");
-}
-
-void cari_riwayat(RiwayatPasien *head){
-    char id_pasien[SHORT];
-    printf("Masukkan ID Pasien yang ingin dicari: ");
-    scanf("%s", id_pasien);
-
-    RiwayatPasien *current = head->next;
-    while (current != NULL) {
-        if (strcmp(current->id_pasien, id_pasien) == 0) {
-            printf("Indeks Riwayat: %d\n", current->indeksriwayat);
-            printf("Tanggal Kunjungan: %s\n", current->tanggal_kunjungan);
-            printf("Diagnosis: %s\n", current->diagnosis);
-            printf("Tindakan: %s\n", current->tindakan);
-            printf("Biaya: %.2f\n", current->biaya);
-            printf("Kontrol: %s\n", current->kontrol);
-            printf("-------------------------------\n");
-        }
-        current = current->next;
-    }
-}
-
-int count_riwayat(RiwayatPasien *head) {
-    int count = 0;
-    RiwayatPasien *current = head->next;
-    while (current != NULL) {
-        count++;
-        current = current->next;
-    }
-    return count;
-}
-
-int count_pasien(Pasien *head) {
-    int count = 0;
-    Pasien *current = head->next;
-    while (current != NULL) {
-        count++;
-        current = current->next;
-    }
-    return count;
-}
-
-int count_tindakan(BiayaTindakan *head) {
-    int count = 0;
-    BiayaTindakan *current = head->next;
-    while (current != NULL) {
-        count++;
-        current = current->next;
-    }
-    return count;
 }

@@ -14,11 +14,11 @@ Proyek ini adalah bagian dari Tugas Besar Penyelesaian Masalah dengan C Semester
 ### Compile Manual dari Terminal
 1. Jalankan perintah kompilasi manual:
    ```
-   gcc -o main main.c utils/parsing.c algoritma/fungsi1.c algoritma/fungsi2.c algoritma/fungsi3.c algoritma/fungsi4.c algoritma/fungsi5.c algoritma/fungsi6.c 
+   gcc -I. -o nubes main.c utils/parsing.c algoritma/fungsi1.c algoritma/fungsi2.c algoritma/fungsi3.c algoritma/fungsi4.c algoritma/fungsi5.c algoritma/fungsi6.c
    ```
 2. Jalankan program yang telah dikompilasi:
    ```
-   ./main
+   ./nubes
    ```
 
 ## Catatan Penting

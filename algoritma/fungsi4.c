@@ -23,9 +23,9 @@ int bulan_ke_nomor(const char *bulan) {
 
 void laporan_pendapatan(RiwayatPasien *head_riwayat) {
     double pendapatan_perbulan[12] = {0};
-    double pendapatan_pertahun[6] = {0};  // Menggunakan array untuk 2018-2023
+    double pendapatan_pertahun[7] = {0};  // Menggunakan array untuk 2018-2024
     int jumlahBulan[12] = {0};
-    int jumlahTahun[6] = {0};  // Menghitung jumlah entri per tahun
+    int jumlahTahun[7] = {0};  // Menghitung jumlah entri per tahun
 
     RiwayatPasien* temp = head_riwayat;
     while (temp != NULL) {
@@ -34,9 +34,9 @@ void laporan_pendapatan(RiwayatPasien *head_riwayat) {
         sscanf(temp->tanggal_kunjungan, "%d %s %d", &hari, bulan, &tahun);
         int bulan_num = bulan_ke_nomor(bulan);
 
-        if (bulan_num < 1 || bulan_num > 12 || tahun < 2018 || tahun > 2023) {
+        if (bulan_num < 1 || bulan_num > 12 || tahun < 2018 || tahun > 2024) {
             temp = temp->next;
-            continue;  // Lewati entri di luar rentang tahun 2018-2023
+            continue;  // melewati diluar rentang 2018-2024
         }
         pendapatan_perbulan[bulan_num - 1] += temp->biaya;
         pendapatan_pertahun[tahun - 2018] += temp->biaya;
@@ -64,7 +64,7 @@ void laporan_pendapatan(RiwayatPasien *head_riwayat) {
     printf("========================================================\n");
     printf("| Tahun |    Total Pendapatan  | Rata-rata Pendapatan |\n");
     printf("========================================================\n");
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 7; i++) {
         int tahun_sekarang = 2018 + i;
         if (jumlahTahun[i] > 0) {
             printf("| %5d | %16.2f     | %20.2f |\n", tahun_sekarang, pendapatan_pertahun[i], pendapatan_pertahun[i] / jumlahTahun[i]);

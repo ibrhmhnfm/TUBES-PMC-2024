@@ -26,9 +26,9 @@ int main() {
     
     // INPUT FILE
     /* Meminta Input Nama File*/
-    char input_file1[MAX], input_file2[MAX];
-    char path1[MAX], path2[MAX];
-    char save_path1[MAX], save_path2[MAX];
+    char input_file1[100], input_file2[100];
+    char path1[100], path2[100];
+    char save_path1[100], save_path2[100];
 
     /* while Loop untuk meminta input nama file sampai benar */
     printf("Masukkan nama file data pasien (contoh: DataPasien.csv): ");

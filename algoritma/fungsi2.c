@@ -48,7 +48,7 @@ void cari_riwayat(RiwayatPasien *head){
     RiwayatPasien *current_riwayat = head;
     int found_riwayat = 0;
 
-    printf("Riwayat Medis Pasien dengan ID: %s\n", id_pasien);        
+    printf("\nRiwayat Medis Pasien dengan ID: %s\n", id_pasien);        
     printf("================================================================================================================================\n");
     printf("| %-5s | %-15s | %-30s | %-30s | %-10s | %-10s |\n", "Indeks", "Tanggal Kunjungan", "Diagnosis", "Tindakan", "Kontrol", "Biaya");
     printf("================================================================================================================================\n");
@@ -216,7 +216,7 @@ void edit_riwayat(RiwayatPasien *head, Pasien *pasien, BiayaTindakan *harga){
         RiwayatPasien *current_riwayat = head;
         int found_riwayat = 0;
 
-        printf("Riwayat Medis Pasien dengan ID: %s\n", id_pasien);
+        printf("\nRiwayat Medis Pasien dengan ID: %s\n", id_pasien);
         printf("================================================================================================================================\n");
         printf("| %-5s | %-15s | %-30s | %-30s | %-10s | %-10s |\n", "Indeks", "Tanggal Kunjungan", "Diagnosis", "Tindakan", "Kontrol", "Biaya");
         printf("================================================================================================================================\n");
@@ -294,7 +294,7 @@ void hapus_riwayat(RiwayatPasien *head, Pasien *pasien){
         RiwayatPasien *current_riwayat = head;
         int found_riwayat = 0;
 
-        printf("Riwayat Medis Pasien dengan ID: %s\n", id_pasien);
+        printf("\nRiwayat Medis Pasien dengan ID: %s\n", id_pasien);
         printf("================================================================================================================================\n");
         printf("| %-5s | %-15s | %-30s | %-30s | %-10s | %-10s |\n", "Indeks", "Tanggal Kunjungan", "Diagnosis", "Tindakan", "Kontrol", "Biaya");
         printf("================================================================================================================================\n");

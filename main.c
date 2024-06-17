@@ -61,13 +61,13 @@ int main() {
                 cari_pasien(head_pasien);
                 break;
             case 5:
-                tambah_riwayat(head_riwayat, head_biaya, head_pasien, count_riwayat(head_riwayat));
+                tambah_riwayat(&head_riwayat,head_pasien, head_biaya);
                 break;
             case 6:
-                edit_riwayat(head_riwayat);
+                edit_riwayat(head_riwayat, head_pasien, head_biaya);
                 break;
             case 7:
-                hapus_riwayat(head_riwayat);
+                hapus_riwayat(head_riwayat, head_pasien);
                 break;
             case 8:
                 cari_riwayat(head_riwayat);
@@ -90,6 +90,7 @@ int main() {
                 printf("Masukkan nama file untuk menyimpan data (misal: DataPasien2024.csv): ");
                 scanf(" %[^\n]", nama_file);
                 simpan_csv_pasien(nama_file, head_pasien);
+                simpan_csv_riwayat(nama_file, head_riwayat);
                 printf("Keluar dari program.\n");*/
                 break;
             default:

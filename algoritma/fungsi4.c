@@ -60,7 +60,7 @@ void laporan_pendapatan(RiwayatPasien *head_riwayat) {
     }
     printf("========================================================\n");
 
-    printf("\nLaporan Pendapatan Tahunan (2018-2023):\n");
+    printf("\nLaporan Pendapatan Tahunan (2018-2024):\n");
     printf("========================================================\n");
     printf("| Tahun |    Total Pendapatan  | Rata-rata Pendapatan |\n");
     printf("========================================================\n");

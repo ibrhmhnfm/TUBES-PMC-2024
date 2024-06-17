@@ -86,11 +86,14 @@ int main() {
                 informasi_kontrol_pasien(head_riwayat);
                 break;
             case 0: 
-                /*char nama_file[100];
-                printf("Masukkan nama file untuk menyimpan data (misal: DataPasien2024.csv): ");
+                /*char nama_file1[100], nama_file2[100];
+                printf("Masukkan nama file untuk menyimpan data pasien (misal: DataPasien2024.csv): ");
                 scanf(" %[^\n]", nama_file);
-                simpan_csv_pasien(nama_file, head_pasien);
-                simpan_csv_riwayat(nama_file, head_riwayat);
+                simpan_csv_pasien(nama_file1, head_pasien);
+
+                printf("Masukkan nama file untuk menyimpan data riwayat (misal: RiwayatPasien2024.csv): ");
+                scanf(" %[^\n]", nama_file2);
+                simpan_csv_riwayat(nama_file2, head_riwayat);
                 printf("Keluar dari program.\n");*/
                 break;
             default:

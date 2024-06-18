@@ -5,7 +5,6 @@
 #include <ctype.h>
 #include "algoritma\const.h"
 
-//Library GTK+
 
 //File-file fungsi
 #include "utils\parsing.c"
@@ -23,10 +22,60 @@ int main() {
     Pasien *head_pasien = NULL;
     RiwayatPasien *head_riwayat = NULL;
     BiayaTindakan *head_biaya = NULL;
+
+    printf("Selamat datang!\n\n");
+
+    printf(" _  ___ _       _ _     __  __  _ \n");
+    printf("| |/ / (_)_ __ (_) | __ \\ \\/ / | |\n");
+    printf("| ' /| | | '_ \\| | |/ /  \\  /  | |\n");
+    printf("| . \\| | | | | | |   <   /  \\  |_|\n");
+    printf("|_|\\_\\_|_|_| |_|_|_|\\_\\ /_/\\_\\ (_)\n\n");
+
+                                                                        
+    /* Meminta Input Nama File*/
+    char input_file1[MAX], input_file2[MAX];
+    char path1[MAX], path2[MAX];
+    char save_path1[MAX], save_path2[MAX];
+    char nama_file1[100], nama_file2[100];
+
+    /* while Loop untuk meminta input nama file sampai benar */
+    printf("Masukkan nama file data pasien (contoh: DataPasien.csv): ");
+    scanf(" %[^\n]", input_file1);
+
+    /* Gabung path data dengan nama file */
+    strcpy(path1, "data/");
+    strcat(path1, input_file1);
     
-    baca_csv_pasien("C:\\Users\\Nasywa\\Downloads\\TUBES-PMC-2024-main\\TUBES-PMC-2024-main\\data\\DataPasien.csv", &head_pasien);
-    baca_csv_riwayat("C:\\Users\\Nasywa\\Downloads\\TUBES-PMC-2024-main\\TUBES-PMC-2024-main\\data\\RiwayatPasien.csv", &head_riwayat);
-    baca_csv_biaya("C:\\Users\\Nasywa\\Downloads\\TUBES-PMC-2024-main\\TUBES-PMC-2024-main\\data\\BiayaTindakan.csv", &head_biaya);
+
+    while(baca_csv_pasien(path1, &head_pasien) == 0){   
+        /* while Loop untuk meminta input nama file sampai benar */
+        printf("Masukkan nama file data pasien (contoh: DataPasien.csv): ");
+        scanf(" %[^\n]", input_file1);
+
+        /* Gabung path data dengan nama file */
+        strcpy(path1, "data/");
+        strcat(path1, input_file1);
+    }
+    
+    /* while Loop untuk meminta input nama file sampai benar */
+    printf("Masukkan nama file data riwayat pasien (contoh: RiwayatPasien.csv): ");
+    scanf(" %[^\n]", input_file2);
+
+    /* Gabung path data dengan nama file */
+    strcpy(path2, "data/");
+    strcat(path2, input_file2);
+
+    while(baca_csv_riwayat(path2, &head_riwayat) == 0){   
+        /* while Loop untuk meminta input nama file sampai benar */
+        printf("Masukkan nama file data riwayat pasien (contoh: RiwayatPasien.csv): ");
+        scanf(" %[^\n]", input_file2);
+
+        /* Gabung path data dengan nama file */
+        strcpy(path2, "data/");
+        strcat(path2, input_file2);
+    }
+    
+    baca_csv_biaya("data/BiayaTindakan.csv", &head_biaya);
 
     int pilihan;
     do {
@@ -61,13 +110,13 @@ int main() {
                 cari_pasien(head_pasien);
                 break;
             case 5:
-                tambah_riwayat(head_riwayat, head_biaya, head_pasien, count_riwayat(head_riwayat));
+                tambah_riwayat(&head_riwayat,head_pasien, head_biaya);
                 break;
             case 6:
-                edit_riwayat(head_riwayat);
+                edit_riwayat(head_riwayat, head_pasien, head_biaya);
                 break;
             case 7:
-                hapus_riwayat(head_riwayat);
+                hapus_riwayat(head_riwayat, head_pasien);
                 break;
             case 8:
                 cari_riwayat(head_riwayat);
@@ -86,11 +135,21 @@ int main() {
                 informasi_kontrol_pasien(head_riwayat);
                 break;
             case 0: 
-                /*char nama_file[100];
-                printf("Masukkan nama file untuk menyimpan data (misal: DataPasien2024.csv): ");
-                scanf(" %[^\n]", nama_file);
-                simpan_csv_pasien(nama_file, head_pasien);
-                printf("Keluar dari program.\n");*/
+                printf("Masukkan nama file untuk menyimpan data pasien (misal: DataPasien2024.csv): ");
+                scanf(" %[^\n]", nama_file1);
+
+                // PATH
+                strcpy(save_path1, "data/");
+                strcat(save_path1, nama_file1);
+                simpan_csv_pasien(save_path1, head_pasien);
+
+                printf("Masukkan nama file untuk menyimpan data riwayat (misal: RiwayatPasien2024.csv): ");
+                scanf(" %[^\n]", nama_file2);
+
+                strcpy(save_path2, "data/");
+                strcat(save_path2, nama_file2);
+                simpan_csv_riwayat(save_path2, head_riwayat);
+                printf("Keluar dari program.\n");
                 break;
             default:
                 printf("Pilihan tidak valid.\n");

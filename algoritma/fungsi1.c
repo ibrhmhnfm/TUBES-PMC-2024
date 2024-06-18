@@ -35,29 +35,31 @@ void cari_pasien(Pasien *head) {
 
     Pasien *temp = head;
     int ditemukan = 0;
-    int rusa = 0;
+    int nomor = 1;
+
+    printf("\n");
 
     while (temp != NULL) {
         if (strstr(temp->nama_pasien, nama) != NULL) {
-            rusa++;
-            if (rusa == 1) printf("\nData Pasien Ditemukan: \n");
-            printf("\n");
-            printf("Indeks Pasien: %d\n", temp->indekspasien);
-            printf("Nama Pasien: %s\n", temp->nama_pasien);
-            printf("Alamat: %s\n", temp->alamat);
-            printf("Kota: %s\n", temp->kota);
-            printf("Tempat Lahir: %s\n", temp->tempat_lahir);
-            printf("Tanggal Lahir: %s\n", temp->tanggal_lahir);
-            printf("Umur: %d\n", temp->umur);
-            printf("Nomor BPJS: %s\n", temp->nomor_bpjs);
-            printf("ID Pasien: %s\n", temp->id_pasien);
+            if (!ditemukan) {
+                printf("============================================================================================================================================================================\n");
+                printf("| %-5s | %-20s | %-30s | %-20s | %-20s | %-20s | %-4s | %-15s | %-10s |\n", 
+                       "No", "Nama", "Alamat", "Kota", "Tempat Lahir", "Tanggal Lahir", "Umur", "Nomor BPJS", "ID Pasien");
+                printf("============================================================================================================================================================================\n");
+            }
+            printf("| %-5d | %-20s | %-30s | %-20s | %-20s | %-20s | %-4d | %-15s | %-10s |\n",
+                   nomor, temp->nama_pasien, temp->alamat, temp->kota, temp->tempat_lahir,
+                   temp->tanggal_lahir, temp->umur, temp->nomor_bpjs, temp->id_pasien);
             ditemukan = 1;
+            nomor++;
         }
         temp = temp->next;
     }
 
     if (!ditemukan) {
         printf("Pasien dengan nama \"%s\" tidak ditemukan.\n", nama);
+    } else {
+        printf("============================================================================================================================================================================\n");
     }
 }
 
@@ -191,7 +193,7 @@ void ubah_pasien(Pasien *head) {
         temp = temp->next;
     }
 
-    printf("Pasien dengan ID \"%s\" tidak ditemukan.\n");
+    printf("Pasien dengan ID \"%s\" tidak ditemukan.\n" ,id);
 }
 
 // Fungsi untuk menghapus pasien
@@ -230,4 +232,3 @@ void hapus_pasien(Pasien **head) {
 
     printf("Data pasien berhasil dihapus.\n");
 }
-

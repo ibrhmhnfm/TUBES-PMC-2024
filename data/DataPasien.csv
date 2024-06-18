@@ -1,4 +1,4 @@
-﻿No,Nama Lengkap,Alamat,Kota,Tempat Lahir,Tanggal Lahir,Umur (th),No BPJS,ID Pasien
+Indeks Pasien,Nama Pasien,Alamat,Kota,Tempat Lahir,Tanggal Lahir,Umur,Nomor BPJS,ID Pasien
 1,Aris Suwito,Jl. Satu No.14,Kota Bandung,Kab. Mojokerto,1 Januari 1980,44,1234567890,KX 1230123
 2,Wawan Gunawan,Jl Dua No.3,Kab. Bandung,Kota Cirebon,14 Desember 1979,44,1234567891,KX 1230124
 3,Nyoman Sukiadi,Jl Lima No.13,Kab. Bogor,Kab. Probolinggo,2 Maret 1975,49,1234567892,KX 1230125
@@ -34,18 +34,19 @@
 33,Kadek Diarta,Jl Enam No.2,Kota Tasikmalaya,Kab. Tasikmalaya,6 Juni 1979,44,1234567922,KX 1230155
 34,Gede Sujana,Jl Enam No.14,Kota Cimahi,Kota Kediri,12 Januari 1977,47,1234567923,KX 1230156
 35,Gede Siki,Jl Lima No.3,Kab. Kuningan,Kab. Ponorogo,13 Juni 1980,43,1234567924,KX 1230157
-36,I Made Mahardana,Jl Sembilan No.4,Kab. Bekasi,Kab. Tuban,23 Agustus 1985,38,1234567925,KX 1230158
-37,Gede Suriada,Jl Lima No.1,Kota Bandung,Kab. Sumedang,2 Juni 1985,38,1234567926,KX 1230159
-38,I Ketut Sumartana,Jl Tiga No.19,Kab. Karawang,Kab. Cilacap,12 Maret 1978,46,1234567927,KX 1230160
-39,I Gede Oka,Jl Enam No.5,Kab. Cianjur,Kota Surabaya,16 September 1979,44,1234567928,KX 1230161
-40,Ketut Laba,Jl Sembilan No.3,Kab. Bandung,Kab. Majalengka,27 September 1981,42,1234567929,KX 1230162
-41,Ketut Suardika,Jl Satu No.4,Kab. Garut,Kab. Subang,29 Mei 1981,43,1234567930,KX 1230163
-42,Kadek Budi Arta Yasa,Jl Tujuh No.16,Kab. Purwakarta,Kab. Jepara,19 Desember 1980,43,1234567931,KX 1230164
-43,I Ketut Switra,Jl Tiga No.14,Kab. Sumedang,Kab. Tulungagung,30 Mei 1980,44,1234567932,KX 1230165
-44,Komang Ngurah Mahardika,Jl Sepuluh No.13,Kab. Bekasi,Kab. Wonogiri,6 April 1984,40,1234567933,KX 1230166
-45,Gede Budi Arta,Jl Tiga No.13,Kab. Bogor,Kab. Gresik,24 Juni 1979,44,1234567934,KX 1230167
-46,Kadek Ngurah Arjana,Jl Sepuluh No.20,Kota Depok,Kota Bekasi,24 April 1980,44,1234567935,KX 1230168
-47,Gede Semara Jaya,Jl Depalan No.19,Kota Depok,Kota Bogor,24 Agustus 1980,43,1234567936,KX 1230169
-48,Ketut Budiarta,Jl Satu No.6,Kab. Pangandaran,Kab. Jepara,17 Desember 1980,43,1234567937,KX 1230170
-49,I Gede Widana,Jl Enam No.14,Kab. Purwakarta,Kab. Bondowoso,27 Oktober 1983,40,1234567938,KX 1230171
-50,Ketut Widarma,Jl Empat No.6,Kab. Cirebon,Kab. Tuban,7 Juni 1982,41,1234567939,KX 1230172
+36,Gede Suriada,Jl Lima No.1,Kota Bandung,Kab. Sumedang,2 Juni 1985,38,1234567926,KX 1230159
+37,I Ketut Sumartana,Jl Tiga No.19,Kab. Karawang,Kab. Cilacap,12 Maret 1978,46,1234567927,KX 1230160
+38,I Gede Oka,Jl Enam No.5,Kab. Cianjur,Kota Surabaya,16 September 1979,44,1234567928,KX 1230161
+39,Ketut Laba,Jl Sembilan No.3,Kab. Bandung,Kab. Majalengka,27 September 1981,42,1234567929,KX 1230162
+40,Ketut Suardika,Jl Satu No.4,Kab. Garut,Kab. Subang,29 Mei 1981,43,1234567930,KX 1230163
+41,Kadek Budi Arta Yasa,Jl Tujuh No.16,Kab. Purwakarta,Kab. Jepara,19 Desember 1980,43,1234567931,KX 1230164
+42,I Ketut Switra,Jl Tiga No.14,Kab. Sumedang,Kab. Tulungagung,30 Mei 1980,44,1234567932,KX 1230165
+43,Komang Ngurah Mahardika,Jl Sepuluh No.13,Kab. Bekasi,Kab. Wonogiri,6 April 1984,40,1234567933,KX 1230166
+44,Gede Budi Arta,Jl Tiga No.13,Kab. Bogor,Kab. Gresik,24 Juni 1979,44,1234567934,KX 1230167
+45,Kadek Ngurah Arjana,Jl Sepuluh No.20,Kota Depok,Kota Bekasi,24 April 1980,44,1234567935,KX 1230168
+46,Gede Semara Jaya,Jl Depalan No.19,Kota Depok,Kota Bogor,24 Agustus 1980,43,1234567936,KX 1230169
+47,Ketut Budiarta,Jl Satu No.6,Kab. Pangandaran,Kab. Jepara,17 Desember 1980,43,1234567937,KX 1230170
+48,Ketut Widarma,Jl Empat No.6,Kab. Cirebon,Kab. Tuban,7 Juni 1982,41,1234567939,KX 1230172
+49,Roger,Jl Royal No. 1,Kota Majapahit,Majapahit,29 Februari 2000,24,1243546567,KX 1230678
+50,Jojo,Jl Tiga No 3,Kota Jember,Jember,28 November 2000,19,123678567,KX 1230456
+51,Alvi,Jl Nusa No. 3,Kota Bekasi,Kota Bekasi,25 November 2000,24,123567865,KX 1230345

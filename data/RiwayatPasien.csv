@@ -1,4 +1,4 @@
-﻿No,Tanggal,ID Pasien,Diagnosis,Tindakan,Kontrol,Biaya (Rp)
+Indeks Riwayat, Tanggal, ID Pasien, Diagnosis, Tindakan, Kontrol, Biaya
 1,1 Januari 2022,KX 1230123,Dehidrasi,Pemasangan infus,4 Januari 2022,265000
 2,11 Agustus 2023,KX 1230132,Masuk Angin,Vaksinasi,14 Agustus 2023,240000
 3,3 September 2023,KX 1230134,Dehidrasi,Cek gula darah,6 September 2023,165000
@@ -74,3 +74,5 @@
 73,18 April 2023,KX 1230147,Dehidrasi,Pengobatan,21 April 2023,290000
 74,10 April 2022,KX 1230150,Keseleo,Vaksinasi,13 April 2022,240000
 75,12 Agustus 2022,KX 1230141,Masuk Angin,Cek gula darah,15 Agustus 2022,165000
+76,17 Juni 2024,KX 1230678,Dehidrasi,Pemasangan infus,20 Juni 2024,125000
+78,13 Juni 2023,KX 1230456,Keseleo,Pengobatan,16 Juni 2023,150000

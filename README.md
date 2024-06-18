@@ -31,3 +31,6 @@ Proyek ini adalah bagian dari Tugas Besar Penyelesaian Masalah dengan C Semester
 3. Roger Supriyanto | 13222099
 4. Ibrahim Hanif Mulyana | 13222111
 5. Musthafa Ibrahim | 18322024 
+
+# link to linux version (outdated) : 
+https://github.com/ibrhmhnfm/TUBESPMC/tree/main
